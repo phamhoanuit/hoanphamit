@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">HomeTest</string>
+    <string name="services_convenience">Dịch vụ tiện ích</string>
+    <string name="air_ticket">Vé máy bay</string>
+    <string name="card_phone"> Mua thẻ điện thoại</string>
+    <string name="cooperate">Ưu đãi &amp; hợp tác</string>
+    <string name="content_cooperate">Các ưu đãi cho chủ thẻ ngân hàng</string>
+</resources>
