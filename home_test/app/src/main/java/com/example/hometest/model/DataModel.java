@@ -1,85 +1,59 @@
-package com.example.hometest;
+package com.example.hometest.model;
 
-import android.os.Handler;
-import android.os.Looper;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
-
-    private RecyclerView mRecycleView;
-    List<String> dataReturn = new ArrayList();
+public class DataModel {
+    private ILoadData listener;
     int countCharacterStart = 0;
     int countCharacterEnd = 0;
     String splitStart = "";
     String splitEnd = "";
-    ListAdapter adapter;
-    LinearLayoutManager manager;
-    final int duration = 5000;
-    final int pixelsToMove = 300;
-    private final Handler mHandler = new Handler(Looper.getMainLooper());
+    List<String> dataReturn = new ArrayList<>();
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        mRecycleView = findViewById(R.id.list_data);
-        mRecycleView.setHasFixedSize(true);
-        processData(ListAdapter.getValue());
-        manager = new LinearLayoutManager(this);
-        manager.setOrientation(LinearLayoutManager.HORIZONTAL);
-
-        adapter = new ListAdapter(dataReturn, this);
-        mRecycleView.setLayoutManager(manager);
-        mRecycleView.setItemAnimator(new DefaultItemAnimator());
-        mRecycleView.setAdapter(adapter);
-        autoScroll();
-
+    public DataModel(ILoadData listener) {
+        this.listener = listener;
     }
 
-    private final Runnable SCROLLING_RUNNABLE = new Runnable() {
-        @Override
-        public void run() {
-            mRecycleView.smoothScrollBy(pixelsToMove, 0);
-            mHandler.postDelayed(this, duration);
-        }
-    };
+    public void createData(){
+        processData(getStringData());
 
-    private void autoScroll(){
-        mRecycleView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-                int lastItem = manager.findLastCompletelyVisibleItemPosition();
-                if(lastItem == manager.getItemCount()-1){
-                    mHandler.removeCallbacks(SCROLLING_RUNNABLE);
-                    Handler postHandler = new Handler();
-                    postHandler.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            mRecycleView.setAdapter(null);
-                            mRecycleView.setAdapter(adapter);
-                            mHandler.postDelayed(SCROLLING_RUNNABLE, 2000);
-                        }
-                    }, 2000);
-                }
-            }
-        });
-        mHandler.postDelayed(SCROLLING_RUNNABLE, 2000);
+        listener.getData(dataReturn);
     }
 
-    private void loadData() {
-        for (String value : dataReturn) {
-            System.out.println(value);
-        }
+    /**
+     * add data
+     * @return
+     */
+    private List<String> getStringData(){
+        List<String> data = new ArrayList<>();
+        data.add("xiaomi");
+        data.add("bts");
+        data.add("balo");
+        data.add("bitis hunter x");
+        data.add("tai nghe");
+        data.add("harry potter");
+        data.add("anker");
+        data.add("iphone");
+        data.add("balo nữ");
+        data.add("nguyễn nhật ánh");
+        data.add("đắc nhân tâm");
+        data.add("ipad");
+        data.add("senka");
+        data.add("tai nghe bluetooth");
+        data.add("son");
+        data.add("maybelline");
+        data.add("laneige");
+        data.add("kem chống nắng");
+        data.add("anh chính là thanh xuân của em");
+        return data;
     }
 
+    /**
+     *
+     * @param data
+     */
     private void processData(List<String> data) {
         for (String value : data) {
             checkValue(value.trim());
@@ -212,6 +186,4 @@ public class MainActivity extends AppCompatActivity {
         }
         return splitStart;
     }
-
-
 }

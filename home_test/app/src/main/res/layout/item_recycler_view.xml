@@ -8,6 +8,7 @@
     android:background="@drawable/custom_item_recycler_view">
 
     <TextView
+        android:textColor="@color/colorWhite"
         android:layout_margin="@dimen/padding_header"
         android:padding="@dimen/padding_bottom"
         android:id="@+id/value_string"

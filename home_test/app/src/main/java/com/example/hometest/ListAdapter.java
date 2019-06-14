@@ -48,27 +48,27 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> 
         }
     }
 
-    public static  List<String> getValue(){
-        data = new ArrayList();
-        data.add("xiaomi");
-        data.add("bts");
-        data.add("balo");
-        data.add("bitis hunter x");
-        data.add("tai nghe");
-        data.add("harry potter");
-        data.add("anker");
-        data.add("iphone");
-        data.add("balo nữ");
-        data.add("nguyễn nhật ánh");
-        data.add("đắc nhân tâm");
-        data.add("ipad");
-        data.add("senka");
-        data.add("tai nghe bluetooth");
-        data.add("son");
-        data.add("maybelline");
-        data.add("laneige");
-        data.add("kem chống nắng");
-        data.add("anh chính là thanh xuân của em");
-        return data;
-    }
+//    public static  List<String> getValue(){
+//        data = new ArrayList();
+//        data.add("xiaomi");
+//        data.add("bts");
+//        data.add("balo");
+//        data.add("bitis hunter x");
+//        data.add("tai nghe");
+//        data.add("harry potter");
+//        data.add("anker");
+//        data.add("iphone");
+//        data.add("balo nữ");
+//        data.add("nguyễn nhật ánh");
+//        data.add("đắc nhân tâm");
+//        data.add("ipad");
+//        data.add("senka");
+//        data.add("tai nghe bluetooth");
+//        data.add("son");
+//        data.add("maybelline");
+//        data.add("laneige");
+//        data.add("kem chống nắng");
+//        data.add("anh chính là thanh xuân của em");
+//        return data;
+//    }
 }
