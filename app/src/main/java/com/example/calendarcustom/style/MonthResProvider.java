@@ -1,4 +1,4 @@
-package pl.rafman.scrollcalendar.style;
+package com.example.calendarcustom.style;
 
 import android.support.annotation.ColorInt;
 

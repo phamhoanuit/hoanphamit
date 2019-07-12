@@ -1,4 +1,4 @@
-package com.example.calendarcustom.ICustom;
+package com.example.calendarcustom.callback;
 
 import android.graphics.Typeface;
 import android.support.annotation.Nullable;
@@ -29,14 +29,14 @@ public interface ResProvider {
     @StyleRes
     int getSelectedEndDayStyle();
 
-//    @StyleRes
-//    int getUnavailableItemStyle();
+    @StyleRes
+    int getUnavailableItemStyle();
 
     @StyleRes
     int getDayStyle();
 
-//    @StyleRes
-//    int getDisabledItemStyle();
+    @StyleRes
+    int getDisabledItemStyle();
 
     boolean showYearAlways();
 

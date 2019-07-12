@@ -1,14 +1,8 @@
-package pl.rafman.scrollcalendar.style;
+package com.example.calendarcustom.style;
 
-import android.content.Context;
-import android.content.res.TypedArray;
 import android.graphics.Typeface;
 import android.support.annotation.ColorInt;
 import android.support.annotation.DrawableRes;
-
-import java.util.Arrays;
-
-import pl.rafman.scrollcalendar.adapter.ResProvider;
 
 public interface DayResProvider {
     @DrawableRes
@@ -63,4 +57,3 @@ public interface DayResProvider {
 
     boolean softLineBreaks();
 }
-

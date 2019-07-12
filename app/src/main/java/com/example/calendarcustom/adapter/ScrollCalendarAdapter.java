@@ -1,34 +1,31 @@
-package pl.rafman.scrollcalendar.adapter;
+package com.example.calendarcustom.adapter;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;
 
+import com.example.calendarcustom.Config;
+import com.example.calendarcustom.callback.ClickCallback;
+import com.example.calendarcustom.callback.DateWatcher;
+import com.example.calendarcustom.callback.MonthScrollListener;
+import com.example.calendarcustom.callback.OnDateClickListener;
+import com.example.calendarcustom.config.State;
+import com.example.calendarcustom.data.CalendarDay;
+import com.example.calendarcustom.data.CalendarMonth;
+import com.example.calendarcustom.style.DayResProvider;
+import com.example.calendarcustom.style.MonthResProvider;
+
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
-import pl.rafman.scrollcalendar.contract.ClickCallback;
-import pl.rafman.scrollcalendar.contract.DateWatcher;
-import pl.rafman.scrollcalendar.contract.MonthScrollListener;
-import pl.rafman.scrollcalendar.contract.OnDateClickListener;
-import pl.rafman.scrollcalendar.contract.State;
-import pl.rafman.scrollcalendar.data.CalendarDay;
-import pl.rafman.scrollcalendar.data.CalendarMonth;
-import pl.rafman.scrollcalendar.style.DayResProvider;
-import pl.rafman.scrollcalendar.style.MonthResProvider;
-
-/**
- * Created by rafal.manka on 10/09/2017
- */
 public class ScrollCalendarAdapter extends RecyclerView.Adapter<MonthViewHolder> implements ClickCallback {
 
     @NonNull
     private final List<CalendarMonth> months = new ArrayList<>();
-
     @Nullable
     private RecyclerView recyclerView;
-
     @Nullable
     private MonthScrollListener monthScrollListener;
     @Nullable
@@ -65,14 +62,6 @@ public class ScrollCalendarAdapter extends RecyclerView.Adapter<MonthViewHolder>
 
     private void afterBindViewHolder(int position) {
         if (recyclerView != null) {
-            if (shouldAddPreviousMonth(position)) {
-                recyclerView.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        prependCalendarMonth();
-                    }
-                });
-            }
             if (shouldAddNextMonth(position)) {
                 recyclerView.post(new Runnable() {
                     @Override
@@ -82,19 +71,6 @@ public class ScrollCalendarAdapter extends RecyclerView.Adapter<MonthViewHolder>
                 });
             }
         }
-
-    }
-
-    private boolean shouldAddPreviousMonth(int position) {
-        return isNearTop(position) && isAllowedToAddPreviousMonth();
-    }
-
-    protected boolean isAllowedToAddPreviousMonth() {
-        if (monthScrollListener == null) {
-            return false;
-        }
-        CalendarMonth item = getFirstItem();
-        return monthScrollListener.shouldAddPreviousMonth(item.getYear(), item.getMonth());
     }
 
     private boolean shouldAddNextMonth(int position) {
@@ -102,10 +78,15 @@ public class ScrollCalendarAdapter extends RecyclerView.Adapter<MonthViewHolder>
     }
 
     protected boolean isAllowedToAddNextMonth() {
+        CalendarMonth item = getLastItem();
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.MONTH, Config.MONTH_ADD);
         if (monthScrollListener == null) {
             return true;
         }
-        CalendarMonth item = getLastItem();
+        if (item.getMonth() == calendar.get(Calendar.MONTH) || Config.MONTH_ADD == 0) {
+            return false;
+        }
         return monthScrollListener.shouldAddNextMonth(item.getYear(), item.getMonth());
     }
 
@@ -129,14 +110,6 @@ public class ScrollCalendarAdapter extends RecyclerView.Adapter<MonthViewHolder>
             return CalendarDay.DEFAULT;
         }
         return dateWatcher.getStateForDate(year, month, day);
-    }
-
-
-    private void prependCalendarMonth() {
-        if (recyclerView != null) {
-            months.add(0, getFirstItem().previous());
-            notifyItemInserted(0);
-        }
     }
 
     private void appendCalendarMonth() {

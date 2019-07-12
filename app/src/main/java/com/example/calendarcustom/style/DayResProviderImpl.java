@@ -1,4 +1,4 @@
-package pl.rafman.scrollcalendar.style;
+package com.example.calendarcustom.style;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -6,9 +6,10 @@ import android.graphics.Typeface;
 import android.support.annotation.ColorInt;
 import android.support.annotation.DrawableRes;
 
+import com.example.calendarcustom.callback.ResProvider;
+
 import java.util.Arrays;
 
-import pl.rafman.scrollcalendar.adapter.ResProvider;
 
 public class DayResProviderImpl implements DayResProvider {
 
@@ -272,5 +273,4 @@ public class DayResProviderImpl implements DayResProvider {
         }
         typedArray.recycle();
     }
-
 }

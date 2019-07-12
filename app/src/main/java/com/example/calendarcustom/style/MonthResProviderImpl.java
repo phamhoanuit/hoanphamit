@@ -1,4 +1,4 @@
-package pl.rafman.scrollcalendar.style;
+package com.example.calendarcustom.style;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -7,9 +7,10 @@ import android.support.annotation.ColorInt;
 import android.support.v4.content.ContextCompat;
 import android.view.Gravity;
 
+import com.example.calendarcustom.callback.ResProvider;
+
 import java.util.Arrays;
 
-import pl.rafman.scrollcalendar.adapter.ResProvider;
 
 public class MonthResProviderImpl implements MonthResProvider {
     private static final int[] attrs = {

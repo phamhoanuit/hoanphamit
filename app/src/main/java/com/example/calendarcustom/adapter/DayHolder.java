@@ -1,4 +1,4 @@
-package pl.rafman.scrollcalendar.adapter;
+package com.example.calendarcustom.adapter;
 
 import android.graphics.Typeface;
 import android.support.annotation.NonNull;
@@ -7,12 +7,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
 
-import pl.rafman.scrollcalendar.R;
-import pl.rafman.scrollcalendar.contract.ClickCallback;
-import pl.rafman.scrollcalendar.data.CalendarDay;
-import pl.rafman.scrollcalendar.data.CalendarMonth;
-import pl.rafman.scrollcalendar.style.DayResProvider;
-import pl.rafman.scrollcalendar.widgets.SquareTextView;
+import com.example.calendarcustom.callback.ClickCallback;
+import com.example.calendarcustom.R;
+import com.example.calendarcustom.data.CalendarDay;
+import com.example.calendarcustom.data.CalendarMonth;
+import com.example.calendarcustom.style.DayResProvider;
+import com.example.calendarcustom.textview_custom.SquareTextView;
 
 /**
  * Created by rafal.manka on 10/09/2017
@@ -40,7 +40,7 @@ class DayHolder implements View.OnClickListener {
 
     public View layout(LinearLayout parent) {
         if (textView == null) {
-            textView = (SquareTextView) LayoutInflater.from(parent.getContext()).inflate(R.layout.scrollcalendar_day, parent, false);
+            textView = (SquareTextView) LayoutInflater.from(parent.getContext()).inflate(R.layout.v_scroll_day_layout, parent, false);
             textView.setOnClickListener(this);
 
         }
@@ -87,9 +87,9 @@ class DayHolder implements View.OnClickListener {
                 case CalendarDay.UNAVAILABLE:
                     setupForUnavailableDate();
                     break;
-                case CalendarDay.DISABLED:
-                    setupForDisabledDate();
-                    break;
+//                case CalendarDay.DISABLED:
+//                    setupForDisabledDate();
+//                    break;
                 case CalendarDay.TODAY:
                     setupForTodayDate();
                     break;
@@ -113,7 +113,6 @@ class DayHolder implements View.OnClickListener {
         if (textView == null) {
             return;
         }
-
         textView.setTextColor(resProvider.getDayTextColor());
         textView.setBackgroundColor(resProvider.getDayBackground());
         setFont(resProvider.getCustomFont());
@@ -123,7 +122,6 @@ class DayHolder implements View.OnClickListener {
         if (textView == null) {
             return;
         }
-
         textView.setTextColor(resProvider.getCurrentDayTextColor());
         textView.setBackgroundResource(resProvider.getCurrentDayBackground());
         setFont(resProvider.getCustomFont());
@@ -134,8 +132,8 @@ class DayHolder implements View.OnClickListener {
             return;
         }
 
-        textView.setTextColor(resProvider.getDisabledTextColor());
-        textView.setBackgroundColor(resProvider.getDisabledBackground());
+        textView.setTextColor(resProvider.getUnavailableTextColor());
+//        textView.setBackgroundColor(resProvider.getUnavailableBackground());
         setFont(resProvider.getCustomFont());
     }
 
@@ -153,7 +151,6 @@ class DayHolder implements View.OnClickListener {
         if (textView == null) {
             return;
         }
-
         textView.setTextColor(resProvider.getSelectedBeginningDayTextColor());
         textView.setBackgroundResource(resProvider.getSelectedBeginningDayBackground());
         setFont(resProvider.getCustomFont());
@@ -163,7 +160,6 @@ class DayHolder implements View.OnClickListener {
         if (textView == null) {
             return;
         }
-
         textView.setTextColor(resProvider.getSelectedEndDayTextColor());
         textView.setBackgroundResource(resProvider.getSelectedEndDayBackground());
         setFont(resProvider.getCustomFont());
@@ -217,7 +213,6 @@ class DayHolder implements View.OnClickListener {
         return isSelected(previousDay) && isSelected(nextDay);
     }
 
-
     private boolean hasNoNeighbours(@Nullable CalendarDay previousDay, @Nullable CalendarDay nextDay) {
         return !isSelected(previousDay) && !isSelected(nextDay);
     }
@@ -251,5 +246,4 @@ class DayHolder implements View.OnClickListener {
             calendarCallback.onCalendarDayClicked(calendarMonth, currentDay);
         }
     }
-
 }

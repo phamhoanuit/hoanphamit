@@ -1,11 +1,13 @@
-package pl.rafman.scrollcalendar.contract;
+package com.example.calendarcustom.config;
 
 import android.support.annotation.IntDef;
 
+import com.example.calendarcustom.data.CalendarDay;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
+import java.util.Calendar;
 
-import pl.rafman.scrollcalendar.data.CalendarDay;
 
 /**
  * Created by rafal.manka on 10/09/2017
@@ -14,8 +16,8 @@ import pl.rafman.scrollcalendar.data.CalendarDay;
         CalendarDay.DEFAULT,
         CalendarDay.DISABLED,
         CalendarDay.TODAY,
-        CalendarDay.UNAVAILABLE,
         CalendarDay.SELECTED,
+        CalendarDay.UNAVAILABLE,
         CalendarDay.FIRST_SELECTED,
         CalendarDay.LAST_SELECTED,
         CalendarDay.ONLY_SELECTED,

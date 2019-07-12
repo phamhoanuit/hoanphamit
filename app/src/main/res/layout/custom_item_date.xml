@@ -15,7 +15,7 @@
             android:textColor="@color/textColor"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="@string/choose_date"
+            android:id="@+id/day_receive"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
@@ -47,9 +47,11 @@
             android:textColor="@color/textColor"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="@string/choose_date"
+            android:id="@+id/day_return"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
+        <!--android:text="@string/choose_date"-->
+
 
         <TextView
             android:id="@+id/hour_return"
@@ -57,9 +59,10 @@
             android:paddingTop="8dp"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="@string/choose_date"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
+        <!--android:text="@string/choose_date"-->
+
     </LinearLayout>
 
 </LinearLayout>

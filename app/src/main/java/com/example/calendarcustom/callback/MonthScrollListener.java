@@ -1,4 +1,4 @@
-package com.example.calendarcustom.ICustom;
+package com.example.calendarcustom.callback;
 
 /**
  * Created by rafal.manka on 18/09/2017

@@ -3,9 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/colorToolbar"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".activity.MainActivity">
 
     <android.support.v7.widget.Toolbar
         android:layout_width="match_parent"
@@ -30,6 +31,8 @@
             android:textColor="@color/textColor" />
 
         <SeekBar
+            android:progressBackgroundTint="@color/progress_background_tint"
+            android:progressTint="@color/progress_tint"
             android:thumbOffset="0dp"
             android:layout_marginRight="16dp"
             android:layout_marginLeft="16dp"
@@ -56,6 +59,8 @@
             android:textColor="@color/textColor" />
 
         <SeekBar
+            android:progressBackgroundTint="@color/progress_background_tint"
+            android:progressTint="@color/progress_tint"
             android:thumbOffset="0dp"
             android:layout_marginRight="16dp"
             android:layout_marginLeft="16dp"
@@ -66,10 +71,23 @@
             android:layout_weight="4" />
     </LinearLayout>
 
-    <CalendarView
-        android:dateTextAppearance="@style/CalenderViewDateCustomText"
-        android:weekDayTextAppearance="@style/CalenderViewWeekCustomText"
+
+
+    <com.example.calendarcustom.config.ScrollCalendar
+        android:id="@+id/scrollCalendar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        app:adapter="none"
+        app:currentDayStyle="@style/CurrentDayStyle"
+        app:dayStyle="@style/DayStyle"
+        app:customFont="fonts/montserrat-light.otf"
+        app:legendItemStyle="@style/LegendItemStyle"
+        app:selectedBeginningItemStyle="@style/SelectedItemBeginningStyle"
+        app:monthTitleStyle="@style/MonthTitleStyle"
+        app:selectedItemStyle="@style/SelectedItemStyle"
+        app:disabledItemStyle="@style/UnavailableItemStyle">
+
+    </com.example.calendarcustom.config.ScrollCalendar>
 
 </LinearLayout>

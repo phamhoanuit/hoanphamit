@@ -1,4 +1,4 @@
-package pl.rafman.scrollcalendar;
+package com.example.calendarcustom.config;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -13,17 +13,19 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.LinearLayout;
 
-import pl.rafman.scrollcalendar.adapter.ResProvider;
-import pl.rafman.scrollcalendar.adapter.ScrollCalendarAdapter;
-import pl.rafman.scrollcalendar.adapter.example.DefaultDateScrollCalendarAdapter;
-import pl.rafman.scrollcalendar.adapter.example.DefaultRangeScrollCalendarAdapter;
-import pl.rafman.scrollcalendar.contract.DateWatcher;
-import pl.rafman.scrollcalendar.contract.MonthScrollListener;
-import pl.rafman.scrollcalendar.contract.OnDateClickListener;
-import pl.rafman.scrollcalendar.style.DayResProviderImpl;
-import pl.rafman.scrollcalendar.style.MonthResProviderImpl;
-import pl.rafman.scrollcalendar.values.Defaults;
-import pl.rafman.scrollcalendar.values.Keys;
+import com.example.calendarcustom.callback.DateWatcher;
+import com.example.calendarcustom.callback.MonthScrollListener;
+import com.example.calendarcustom.callback.OnDateClickListener;
+import com.example.calendarcustom.callback.ResProvider;
+import com.example.calendarcustom.R;
+import com.example.calendarcustom.adapter.ScrollCalendarAdapter;
+import com.example.calendarcustom.calendar_custom.DefaultDateScrollCalendarAdapter;
+import com.example.calendarcustom.calendar_custom.DefaultRangeScrollCalendarAdapter;
+import com.example.calendarcustom.style.DayResProviderImpl;
+import com.example.calendarcustom.style.Defaults;
+import com.example.calendarcustom.style.Keys;
+import com.example.calendarcustom.style.MonthResProviderImpl;
+
 
 /**
  * Created by rafal.manka on 10/09/2017
@@ -56,6 +58,8 @@ public class ScrollCalendar extends LinearLayoutCompat implements ResProvider {
     private int unavailableItemStyle;
     @StyleRes
     private int dayStyle;
+    @StyleRes
+    private int colorDaySelected;
 
     private int defaultAdapter;
     private boolean showYearAlways;
@@ -82,7 +86,7 @@ public class ScrollCalendar extends LinearLayoutCompat implements ResProvider {
 
     private void init(@NonNull Context context) {
         setOrientation(VERTICAL);
-        inflate(context, R.layout.scrollcalendar_calendar, this);
+        inflate(context, R.layout.v_scroll_calendar_layout, this);
         for (int i = 0; i < legend.length; i++) {
             legend[i] = new LegendItem(i + 1);
         }
@@ -97,26 +101,21 @@ public class ScrollCalendar extends LinearLayoutCompat implements ResProvider {
         monthTitleStyle = typedArray.getResourceId(R.styleable.ScrollCalendar_monthTitleStyle, 0);
         legendItemStyle = typedArray.getResourceId(R.styleable.ScrollCalendar_legendItemStyle, 0);
         currentDayStyle = typedArray.getResourceId(R.styleable.ScrollCalendar_currentDayStyle, 0);
-        selectedBeginningDayStyle = typedArray.getResourceId(R.styleable.ScrollCalendar_selectedBeginningItemStyle, 0);
+        selectedBeginningDayStyle = typedArray.getResourceId(R.styleable.ScrollCalendar_selectedBeginningItemStyle, 1);
         legendSeparatorStyle = typedArray.getResourceId(R.styleable.ScrollCalendar_legendSeparatorStyle, 0);
         selectedMiddleDayStyle = typedArray.getResourceId(R.styleable.ScrollCalendar_selectedMiddleItemStyle, 0);
         selectedEndDayStyle = typedArray.getResourceId(R.styleable.ScrollCalendar_selectedEndItemStyle, 0);
-        disabledItemStyle = typedArray.getResourceId(R.styleable.ScrollCalendar_disabledItemStyle, 0);
+//        disabledItemStyle = typedArray.getResourceId(R.styleable.ScrollCalendar_disabledItemStyle, 0);
         unavailableItemStyle = typedArray.getResourceId(R.styleable.ScrollCalendar_unavailableItemStyle, 0);
         dayStyle = typedArray.getResourceId(R.styleable.ScrollCalendar_dayStyle, 0);
         showYearAlways = typedArray.getBoolean(R.styleable.ScrollCalendar_showYearAlways, false);
         softLineBreaks = typedArray.getBoolean(R.styleable.ScrollCalendar_roundLineBreaks, true);
+
         typedArray.recycle();
     }
 
     public void setOnDateClickListener(@Nullable final OnDateClickListener calendarCallback) {
         getAdapter().setOnDateClickListener(calendarCallback);
-    }
-
-    @SuppressWarnings("unused")
-    public void refresh() {
-        refreshLegend();
-        getAdapter().notifyDataSetChanged();
     }
 
     public void setDateWatcher(@Nullable final DateWatcher dateWatcher) {
@@ -136,7 +135,6 @@ public class ScrollCalendar extends LinearLayoutCompat implements ResProvider {
     protected void onFinishInflate() {
         super.onFinishInflate();
         setupLegend();
-        setupSeparatorStyle();
         setupRecyclerView();
     }
 
@@ -154,31 +152,7 @@ public class ScrollCalendar extends LinearLayoutCompat implements ResProvider {
         recyclerView.setAdapter(getAdapter());
     }
 
-    private void setupSeparatorStyle() {
-        // Legend
-        View separator = findViewById(R.id.separator);
-        TypedArray typedArray = getContext().getTheme().obtainStyledAttributes(legendSeparatorStyle, attrs);
-        for (int i = 0; i < attrs.length; i++) {
-            switch (attrs[i]) {
-                case android.R.attr.background: {
-                    int resource = typedArray.getResourceId(i, 0);
-                    if (resource != 0) {
-                        separator.setBackgroundResource(resource);
-                    }
-                    break;
-                }
-                case android.R.attr.height: {
-                    int resource = typedArray.getDimensionPixelSize(i, 0);
-                    LayoutParams params = new LayoutParams(LayoutParams.MATCH_PARENT, resource);
-                    separator.setLayoutParams(params);
-                    break;
-                }
-                default:
-                    break;
-            }
-        }
-        typedArray.recycle();
-    }
+
 
     private void refreshLegend() {
         for (LegendItem legendItem : legend) {
@@ -197,15 +171,16 @@ public class ScrollCalendar extends LinearLayoutCompat implements ResProvider {
     private ScrollCalendarAdapter createAdapter() {
         MonthResProviderImpl monthResProvider = new MonthResProviderImpl(getContext(), this);
         DayResProviderImpl dayResProvider = new DayResProviderImpl(getContext(), this);
-        switch (defaultAdapter) {
-            case 1:
-                return new DefaultDateScrollCalendarAdapter(monthResProvider, dayResProvider);
-            case 2:
-                return new DefaultRangeScrollCalendarAdapter(monthResProvider, dayResProvider);
-            case 0:
-            default:
-                return new ScrollCalendarAdapter(monthResProvider, dayResProvider);
-        }
+        return new ScrollCalendarAdapter(monthResProvider, dayResProvider);
+//        switch (defaultAdapter) {
+//            case 1:
+//                return new DefaultDateScrollCalendarAdapter(monthResProvider, dayResProvider);
+//            case 2:
+//                return new DefaultRangeScrollCalendarAdapter(monthResProvider, dayResProvider);
+//            case 0:
+//            default:
+//                return new ScrollCalendarAdapter(monthResProvider, dayResProvider);
+//        }
     }
 
     @StyleRes
@@ -277,8 +252,6 @@ public class ScrollCalendar extends LinearLayoutCompat implements ResProvider {
         return softLineBreaks;
     }
 
-    // Other
-
     @Override
     @Nullable
     public Typeface getCustomFont() {
@@ -291,6 +264,4 @@ public class ScrollCalendar extends LinearLayoutCompat implements ResProvider {
             return null;
         }
     }
-
-
 }

@@ -1,7 +1,8 @@
-package com.example.calendarcustom.calendar_custom_v2;
+package com.example.calendarcustom.calendar_custom;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Log;
 
 import com.example.calendarcustom.adapter.ScrollCalendarAdapter;
 import com.example.calendarcustom.data.CalendarDay;
@@ -33,6 +34,7 @@ public class DefaultDateScrollCalendarAdapter extends ScrollCalendarAdapter {
         calendar.set(Calendar.MILLISECOND, 0);
 
         if (isInThePast(year, month, day)) {
+            Log.d("TAG", "onCalendarDayClicked: past day click" );
             return;
         }
 
@@ -75,10 +77,7 @@ public class DefaultDateScrollCalendarAdapter extends ScrollCalendarAdapter {
         return now > then;
     }
 
-    @Override
-    protected boolean isAllowedToAddPreviousMonth() {
-        return false;
-    }
+
 
     @Override
     protected boolean isAllowedToAddNextMonth() {

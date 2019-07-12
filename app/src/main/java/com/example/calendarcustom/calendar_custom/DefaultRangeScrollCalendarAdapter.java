@@ -1,4 +1,4 @@
-package com.example.calendarcustom.calendar_custom_v2;
+package com.example.calendarcustom.calendar_custom;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -26,9 +26,6 @@ public class DefaultRangeScrollCalendarAdapter extends ScrollCalendarAdapter {
 
     @Override
     protected void onCalendarDayClicked(int year, int month, int day) {
-//        if (isInThePast(year, month, day)) {
-//            return;
-//        }
         Calendar clickedOn = Calendar.getInstance();
         clickedOn.set(Calendar.YEAR, year);
         clickedOn.set(Calendar.MONTH, month);
@@ -38,17 +35,13 @@ public class DefaultRangeScrollCalendarAdapter extends ScrollCalendarAdapter {
         clickedOn.set(Calendar.SECOND, 0);
         clickedOn.set(Calendar.MILLISECOND, 0);
 
-        Log.d("TAG", "onCalendarDayClicked: default range scroll calendar adapter");
         if (shouldClearAllSelected(clickedOn)) {
-            Log.d("TAG", "onCalendarDayClicked: shouldClearAllSelected");
             from = null;
             until = null;
         } else if (shouldSetFrom(clickedOn)) {
-            Log.d("TAG", "onCalendarDayClicked: shouldSetFrom");
             from = clickedOn;
             until = null;
         } else if (shouldSetUntil()) {
-            Log.d("TAG", "onCalendarDayClicked: shouldSetUntil");
             until = clickedOn;
         }
         super.onCalendarDayClicked(year, month, day);
@@ -57,9 +50,9 @@ public class DefaultRangeScrollCalendarAdapter extends ScrollCalendarAdapter {
     @State
     @Override
     protected int getStateForDate(int year, int month, int day) {
-//        if (isInThePast(year, month, day)) {
-//            return CalendarDay.DISABLED;
-//        }
+        if (isInThePast(year, month, day)) {
+            return CalendarDay.DISABLED;
+        }
         if (isInRange(from, until, year, month, day)) {
             if (until == null) {
                 return CalendarDay.ONLY_SELECTED;
@@ -155,10 +148,7 @@ public class DefaultRangeScrollCalendarAdapter extends ScrollCalendarAdapter {
         return now > then;
     }
 
-    @Override
-    protected boolean isAllowedToAddPreviousMonth() {
-        return false;
-    }
+
 
     @Override
     protected boolean isAllowedToAddNextMonth() {

@@ -11,6 +11,13 @@
     <color name="calendar_number">#242223</color>
     <color name="grey">#F25A4F53</color>
 
+    <color name="scrollcalendar_primary">#368287</color>
+    <color name="yellow">#FFEB3B</color>
+    <color name="transparent_background">#80000000</color>
+
+    <color name="stroke_color">#004d00</color>
+    <color name="progress_tint">#004d00</color>
+    <color name="progress_background_tint">#919995</color>
 
 
 </resources>

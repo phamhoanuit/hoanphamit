@@ -1,8 +1,10 @@
-package pl.rafman.scrollcalendar.data;
+package com.example.calendarcustom.data;
+
+
+import com.example.calendarcustom.config.State;
 
 import java.io.Serializable;
 
-import pl.rafman.scrollcalendar.contract.State;
 
 /**
  * Created by rafal.manka on 10/09/2017

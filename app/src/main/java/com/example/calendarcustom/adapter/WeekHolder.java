@@ -1,20 +1,18 @@
-package pl.rafman.scrollcalendar.adapter;
+package com.example.calendarcustom.adapter;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
 
-import pl.rafman.scrollcalendar.R;
-import pl.rafman.scrollcalendar.contract.ClickCallback;
-import pl.rafman.scrollcalendar.data.CalendarDay;
-import pl.rafman.scrollcalendar.data.CalendarMonth;
-import pl.rafman.scrollcalendar.style.DayResProvider;
+import com.example.calendarcustom.callback.ClickCallback;
+import com.example.calendarcustom.R;
+import com.example.calendarcustom.data.CalendarDay;
+import com.example.calendarcustom.data.CalendarMonth;
+import com.example.calendarcustom.style.DayResProvider;
 
-/**
- * Created by rafal.manka on 11/09/2017
- */
 class WeekHolder {
 
     private final DayHolder[] days = new DayHolder[7];
@@ -32,7 +30,7 @@ class WeekHolder {
     public View layout(LinearLayout parent) {
         if (container == null) {
             container = (LinearLayout) LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.scrollcalendar_week, parent, false);
+                    .inflate(R.layout.v_scroll_week, parent, false);
             if (container != null) {
                 for (DayHolder day : days) {
                     container.addView(day.layout(container));
@@ -42,6 +40,12 @@ class WeekHolder {
         return container;
     }
 
+    /**
+     * show calendar
+     * @param week
+     * @param month
+     * @param daysOfWeek
+     */
     void display(int week, CalendarMonth month, CalendarDay[] daysOfWeek) {
         if (container != null) {
             container.setVisibility(daysOfWeek.length == 0 ? View.GONE : View.VISIBLE);

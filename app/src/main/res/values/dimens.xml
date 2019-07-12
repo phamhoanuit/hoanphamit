@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="abc">60dp</dimen>
-    <dimen name="space">8dp</dimen>
+    <dimen name="space">16dp</dimen>
+    <dimen name="padding_top">16dp</dimen>
+    <dimen name="scrollcalendar_sp12">22sp</dimen>
+    <dimen name="scrollcalendar_radius">100sp</dimen>
+    <dimen name="text_size">14sp</dimen>
+    <dimen name="dimen_with_progress_bar">2dp</dimen>
 </resources>

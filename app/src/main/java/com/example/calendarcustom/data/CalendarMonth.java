@@ -1,4 +1,4 @@
-package pl.rafman.scrollcalendar.data;
+package com.example.calendarcustom.data;
 
 import android.support.annotation.NonNull;
 
@@ -6,9 +6,6 @@ import java.io.Serializable;
 import java.text.DateFormatSymbols;
 import java.util.Calendar;
 
-/**
- * Created by rafal.manka on 10/09/2017
- */
 
 public class CalendarMonth implements Serializable {
 

@@ -1,8 +1,9 @@
-package pl.rafman.scrollcalendar.values;
+package com.example.calendarcustom.style;
 
 import android.support.annotation.StyleableRes;
 
-import pl.rafman.scrollcalendar.R;
+import com.example.calendarcustom.R;
+
 
 /**
  * Created by rafal.manka on 15/09/2017
