@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <item>
-        <shape android:shape="rectangle">
+        <shape android:shape="oval">
             <corners android:radius="0.7dp"/>
-            <solid android:color="@color/colorToolbar"/>
+            <solid android:color="@color/pink"/>
             <size
-                android:width="42dp"
+                android:width="24dp"
                 android:height="24dp"/>
-            <stroke  android:width="0.5dp"
+            <stroke  android:width="0dp"
                 android:color="#04641D"/>
         </shape>
     </item>

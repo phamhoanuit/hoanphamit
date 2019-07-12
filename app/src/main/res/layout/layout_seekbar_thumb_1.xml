@@ -3,11 +3,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center"
-    android:gravity="center"
-    android:orientation="vertical">
+    android:background="@drawable/ic_seekbar_thumb_back"
+    android:gravity="center">
 
     <TextView
-        android:id="@+id/tvProgressReceive"
+        android:id="@+id/tvProgressReturn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="0"

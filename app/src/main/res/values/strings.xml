@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">CalendarCustom</string>
+    <string name="choose_date">Chọn ngày</string>
+    <string name="time_receive_car">Giờ nhận xe</string>
+    <string name="time_return_car">Giờ trả xe</string>
+</resources>

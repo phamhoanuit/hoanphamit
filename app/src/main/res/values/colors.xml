@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+    <color name="colorToolbar">#000000</color>
+    <color name="textColor">#FFFFFF</color>
+    <color name="red">#D30B0B</color>
+    <color name="green">#155385</color>
+    <color name="pink">#FA05BD</color>
+    <color name="calendar_number">#242223</color>
+    <color name="grey">#F25A4F53</color>
+
+
+
+</resources>

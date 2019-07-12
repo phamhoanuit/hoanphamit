@@ -20,13 +20,14 @@
             android:layout_height="match_parent" />
 
         <TextView
-            android:textColor="@color/textColor"
-            android:paddingTop="8dp"
+            android:id="@+id/hour_receive"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
+            android:paddingTop="8dp"
             android:text="@string/choose_date"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:textColor="@color/textColor" />
     </LinearLayout>
 
     <ImageView
@@ -38,7 +39,6 @@
 
     <LinearLayout
         android:orientation="vertical"
-        android:gravity="center"
         android:layout_weight="2"
         android:layout_width="0dp"
         android:layout_height="match_parent">
@@ -52,6 +52,7 @@
             android:layout_height="match_parent" />
 
         <TextView
+            android:id="@+id/hour_return"
             android:textColor="@color/textColor"
             android:paddingTop="8dp"
             android:layout_weight="1"
